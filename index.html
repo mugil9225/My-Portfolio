@@ -3,236 +3,863 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karmukilan K | Portfolio</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <title>Karmukilan K - Portfolio</title>
     <style>
-        /* --- General Styles --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap');
+
+        * {
             margin: 0;
             padding: 0;
-            color: #333;
-            line-height: 1.6;
+            box-sizing: border-box;
         }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; padding: 0; }
 
-        /* --- Navigation --- */
-        nav {
-            background: #1a1a2e;
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            background: #000;
+            color: #fff;
         }
-        nav .container {
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 2rem 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 90%;
-            margin: auto;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            backdrop-filter: blur(10px);
         }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { font-weight: bold; color: #fff; transition: 0.3s; }
-        .nav-links a:hover { color: #00d4ff; }
 
-        /* --- Sections --- */
-        section { padding: 60px 0; }
-        .container { width: 85%; margin: auto; max-width: 1100px; }
-        h2 { text-align: center; font-size: 2.5rem; margin-bottom: 40px; color: #1a1a2e; }
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        /* --- Home Section --- */
-        #home {
-            height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ff87, #60efff);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 0 6%;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            margin-top: -60px; /* Offset fixed nav */
+            position: relative;
         }
-        #home h1 { font-size: 3rem; margin: 0; }
-        #home p { font-size: 1.5rem; margin-top: 10px; color: #00d4ff; }
 
-        /* --- About Section --- */
-        #about .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            flex-wrap: wrap;
+        #home {
+            background: radial-gradient(ellipse at top, #1e3a8a, #000 60%);
+            position: relative;
+            overflow: hidden;
         }
-        .about-text { flex: 1; }
-        .about-image { flex: 1; text-align: center; }
-        .about-image img {
+
+        .home-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 135, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(96, 239, 255, 0.15) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            max-width: 1600px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 7rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #fff 0%, #00ff87 50%, #60efff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-text .subtitle {
+            font-size: 2.5rem;
+            color: #60efff;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(96, 239, 255, 0.5);
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            color: #ccc;
+            margin-bottom: 3rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .btn {
+            padding: 1.5rem 4rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.4s;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
             width: 300px;
             height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            color: #000;
+            box-shadow: 0 20px 60px rgba(0, 255, 135, 0.4);
+            position: relative;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0, 255, 135, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #00ff87;
+            position: relative;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 255, 135, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .hero-visual {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .card-3d {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card-3d:hover {
+            transform: rotateY(10deg) rotateX(5deg);
+        }
+
+        .card-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 135, 0.1), rgba(96, 239, 255, 0.1));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-front img {
+            width: 100%;
+            height: 400px;
             object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            background-color: #ddd; /* Placeholder color */
+            border-radius: 20px;
+            margin-bottom: 2rem;
         }
 
-        /* --- Skills Section --- */
-        #skills { background: #f4f4f4; }
-        .skills-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .skill-card {
-            background: white;
-            padding: 15px 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #1a1a2e;
-            border-left: 5px solid #00d4ff;
+        .card-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
         }
 
-        /* --- Project Section --- */
-        .project-card {
-            background: white;
-            border: 1px solid #ddd;
-            padding: 30px;
-            border-radius: 10px;
+        .stat-item {
             text-align: center;
-            max-width: 600px;
-            margin: auto;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            background: rgba(0, 255, 135, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 135, 0.3);
         }
-        .project-card h3 { color: #1a1a2e; margin-top: 0; }
-        .btn {
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-item p {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 0.5rem;
+        }
+
+        #about {
+            background: linear-gradient(180deg, #000 0%, #0a0a2e 50%, #000 100%);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            max-width: 1600px;
+        }
+
+        .about-visual {
+            position: relative;
+            height: 700px;
+        }
+
+        .image-box {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0, 255, 135, 0.3);
+            transition: all 0.6s;
+        }
+
+        .image-box:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 50px 120px rgba(0, 255, 135, 0.5);
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .image-box:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 255, 135, 0.3), rgba(96, 239, 255, 0.3));
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+
+        .image-box:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .about-content h2 {
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .about-content p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .about-content strong {
+            color: #00ff87;
+            font-weight: 700;
+        }
+
+        #skills {
+            background: #000;
+        }
+
+        .skills-container {
+            max-width: 1600px;
+            width: 100%;
+        }
+
+        #skills h2 {
+            font-size: 5.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 6rem;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skills-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .skill-tile {
+            background: linear-gradient(135deg, rgba(0, 255, 135, 0.05), rgba(96, 239, 255, 0.05));
+            border: 2px solid rgba(0, 255, 135, 0.2);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            text-align: center;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-tile::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 135, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .skill-tile:hover::before {
+            opacity: 1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .skill-tile:hover {
+            transform: translateY(-20px) scale(1.05);
+            border-color: #00ff87;
+            box-shadow: 0 30px 80px rgba(0, 255, 135, 0.4);
+        }
+
+        .skill-emoji {
+            font-size: 5rem;
+            margin-bottom: 2rem;
             display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #00d4ff;
-            color: #1a1a2e;
-            border-radius: 5px;
-            font-weight: bold;
+            transition: all 0.5s;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 135, 0.5));
         }
 
-        /* --- Contact Section --- */
-        #contact { background: #1a1a2e; color: white; text-align: center; padding-bottom: 40px; }
-        #contact h2 { color: white; }
-        .contact-info p { margin: 10px 0; font-size: 1.2rem; }
-        .contact-info a { color: #00d4ff; }
-
-        /* --- Social Icons Styling --- */
-        .socials {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .socials a {
-            color: white;
-            font-size: 2rem; /* Size of the icons */
-            transition: 0.3s;
-        }
-        .socials a:hover {
-            color: #00d4ff;
-            transform: scale(1.1); /* Slight zoom on hover */
+        .skill-tile:hover .skill-emoji {
+            transform: scale(1.3) rotateY(360deg);
         }
 
-        /* --- Mobile Responsive --- */
+        .skill-tile h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-tile p {
+            color: #aaa;
+            font-size: 1rem;
+        }
+
+        #project {
+            background: linear-gradient(180deg, #000 0%, #1e0a3e 50%, #000 100%);
+        }
+
+        .project-container {
+            max-width: 1600px;
+            width: 100%;
+        }
+
+        #project h2 {
+            font-size: 5.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 6rem;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-feature {
+            background: linear-gradient(135deg, rgba(0, 255, 135, 0.1), rgba(96, 239, 255, 0.1));
+            border: 2px solid rgba(0, 255, 135, 0.3);
+            border-radius: 40px;
+            padding: 6rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s;
+        }
+
+        .project-feature::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 255, 135, 0.2), transparent 70%);
+            top: -250px;
+            right: -250px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, 50px); }
+        }
+
+        .project-feature:hover {
+            transform: translateY(-20px);
+            border-color: #00ff87;
+            box-shadow: 0 40px 100px rgba(0, 255, 135, 0.5);
+        }
+
+        .project-info {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            color: #000;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .project-info h3 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .project-info p {
+            font-size: 1.4rem;
+            line-height: 2;
+            color: #ccc;
+            margin-bottom: 4rem;
+        }
+
+        .project-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 4rem;
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.4s;
+            box-shadow: 0 20px 60px rgba(0, 255, 135, 0.4);
+        }
+
+        .project-action:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 255, 135, 0.6);
+        }
+
+        #contact {
+            background: radial-gradient(ellipse at bottom, #1e3a8a, #000 60%);
+        }
+
+        .contact-container {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        #contact h2 {
+            font-size: 5.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-subtitle {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #aaa;
+            margin-bottom: 6rem;
+        }
+
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(0, 255, 135, 0.05), rgba(96, 239, 255, 0.05));
+            border: 2px solid rgba(0, 255, 135, 0.2);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            text-align: center;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 255, 135, 0.1), rgba(96, 239, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .contact-card:hover::before {
+            opacity: 1;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-20px);
+            border-color: #00ff87;
+            box-shadow: 0 30px 80px rgba(0, 255, 135, 0.4);
+        }
+
+        .contact-icon {
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            transition: all 0.5s;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 135, 0.5));
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.3) rotate(360deg);
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            color: #00ff87;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .contact-card a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            word-break: break-word;
+        }
+
+        .contact-card a:hover {
+            color: #fff;
+        }
+
+        @media (max-width: 1200px) {
+            .hero-grid, .about-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            .hero-text h1 { font-size: 5rem; }
+            .skills-showcase, .contact-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
-            #about .about-content { flex-direction: column; text-align: center; }
-            .nav-links { display: none; }
+            .hero-text h1 { font-size: 3.5rem; }
+            .skills-showcase, .contact-options {
+                grid-template-columns: 1fr;
+            }
+            section { padding: 0 4%; }
+            nav ul { gap: 1.5rem; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
+    <div class="stars" id="stars"></div>
 
     <nav>
-        <div class="container">
-            <div class="logo" style="font-size: 1.5rem; font-weight: bold;"> Portfolio.</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#project">Project</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
+        <div class="logo"> Portfolio. </div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#project">Project</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
     <section id="home">
-        <div>
-            <h1> Karmukilan K </h1>
-            <p>Aspiring Cyber Security | Web Developer</p>
+        <div class="home-bg"></div>
+        <div class="hero-grid">
+            <div class="hero-text">
+                <h1>KARMUKILAN </h1>
+                <div class="subtitle">Aspiring Cyber Security Professional</div>
+                <p>I'm passionate about protecting digital landscapes and building innovative, secure web solutions that make a real difference in our connected world.</p>
+                <div class="cta-group">
+                    <a href="#project" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="card-3d">
+                    <div class="card-front">
+                        <img src="Background.avif" alt="Professional">
+                        <div class="card-stats">
+                            <div class="stat-item">
+                                <h3>6+</h3>
+                                <p>Skills</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3>1+</h3>
+                                <p>Projects</p>
+                            </div>
+                            <div class="stat-item">
+                                <h3>100%</h3>
+                                <p>Passion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
+        <div class="about-grid">
+            <div class="about-visual">
+                <div class="image-box">
+                    <img src="profile.jpg" alt="Technology">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
             <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        Hello! I’m <strong>Karmukilan K</strong>, an aspiring Cyber Security professional with a hunger for learning and a drive to create.I am a passionate and driven individual with a strong interest in technology and continuous learning. I enjoy exploring new tools, building practical skills, and working on projects that solve real-world problems.
-                    </p>
-                    <p>              
-                        I believe in learning by doing and constantly improving myself through hands-on experience. I am highly motivated, adaptable, and eager to grow in a challenging environment where I can apply my knowledge and contribute meaningfully.
-                    </p>
-                    <p>
-                        My goal is to build a successful career by developing in-demand skills, staying updated with industry trends, and creating impactful solutions through technology.
-                    </p>
-                </div>
-                <div class="about-image">
-                    <img src="profile.jpg" alt="Karmukilan K">
-                </div>
+                <h2>About Me</h2>
+                <p>Hello! I'm <strong>Karmukilan K</strong>, an aspiring Cyber Security professional with a hunger for learning and a drive to create innovative solutions.</p>
+                <p>I'm currently studying B.E CSE (Cyber Security). During my studies, I developed a strong foundation in Web Development, and I'm particularly interested in how Cyber Security is changing the way we work.</p>
+                <p>Even though I'm at the start of my professional journey, I've already worked on exciting projects and internships. I'm looking to bring my energy and fresh perspective to a team that values innovation and growth.</p>
             </div>
         </div>
     </section>
 
     <section id="skills">
-        <div class="container">
-            <h2>Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card">HTML</div>
-                <div class="skill-card">CSS</div>
-                <div class="skill-card">JAVASCRIPT</div>
-                <div class="skill-card">JAVA BASIC</div>
-                <div class="skill-card">PYTHON BASIC</div>
-                <div class="skill-card">#C BASIC</div>
+        <div class="skills-container">
+            <h2>My Skills</h2>
+            <div class="skills-showcase">
+                <div class="skill-tile">
+                    <div class="skill-emoji">🌐</div>
+                    <h3>HTML</h3>
+                    <p>Web Structure & Markup</p>
+                </div>
+                <div class="skill-tile">
+                    <div class="skill-emoji">🎨</div>
+                    <h3>CSS</h3>
+                    <p>Styling & Design</p>
+                </div>
+                <div class="skill-tile">
+                    <div class="skill-emoji">⚡</div>
+                    <h3>JavaScript</h3>
+                    <p>Web Interactivity</p>
+                </div>
+                <div class="skill-tile">
+                    <div class="skill-emoji">☕</div>
+                    <h3>Java Basic</h3>
+                    <p>Object-Oriented Programming</p>
+                </div>
+                <div class="skill-tile">
+                    <div class="skill-emoji">🐍</div>
+                    <h3>Python Basic</h3>
+                    <p>Scripting & Automation</p>
+                </div>
+                <div class="skill-tile">
+                    <div class="skill-emoji">💻</div>
+                    <h3>C Basic</h3>
+                    <p>System Programming</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="project">
-        <div class="container">
-            <h2>Project</h2>
-            <div class="project-card">
-                <h3>Free Learning Hub Platform</h3>
-                <p>A mobile application concept to aggregate free online courses that provide certificates.</p>
-                <a href="#" class="btn">View Sample URL</a>
+        <div class="project-container">
+            <h2>Featured Project</h2>
+            <div class="project-feature">
+                <div class="project-info">
+                    <span class="project-badge">🚀 FEATURED WORK</span>
+                    <h3>Free Learning Hub Platform</h3>
+                    <p>A comprehensive learning platform designed to democratize education by providing free, high-quality educational resources to students worldwide. This innovative project bridges the educational gap and empowers learners from all backgrounds to achieve their dreams and reach their full potential.</p>
+                    <a href="#" class="project-action">
+                        Explore Project
+                        <span>→</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="contact">
-        <div class="container">
-            <h2>Contact</h2>
-            <div class="contact-info">
-                <p><strong>Email:</strong> karmugilan.k@Actechnology.in</p>
-                <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/karmugilan-kuppusamy-075" target="_blank">karmugilan-kuppusamy-075</a></p>
-                <p><strong>Github:</strong> https://github.com/mugil9225 </p
-            </div>
-            
-            <div class="socials">
-                <a href="https://github.com/mugil9225"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/karmugilan-kuppusamy-075"><i class="fab fa-linkedin"></i></a>
-                <a href="https://x.com/Mugil0909"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <div class="contact-container">
+            <h2>Let's Connect</h2>
+            <p class="contact-subtitle">Ready to start a conversation? Reach out through any of these channels!</p>
+            <div class="contact-options">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>E-mail</h3>
+                    <a href="mailto:karmugilan.k@Actechnology.in">karmugilan.k@Actechnology.in</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <h3>LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/karmugilan-kuppusamy-075" target="_blank">Explore Me </a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">💻</div>
+                    <h3>Git-Hub</h3>
+                    <a href="https://mugil9225.github.io/My-Portfolio/"> Trust Me  </a>
+                </div>
             </div>
         </div>
     </section>
 
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.skill-tile, .contact-card, .project-feature').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px) scale(0.9)';
+            el.style.transition = 'all 0.8s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
